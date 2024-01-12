@@ -1,0 +1,85 @@
+.order {
+  background-color: #f5f5f5;
+  &__step {
+    padding-top: 20px;
+    &__inner {
+      border-radius: 5px;
+      background-color: white;
+      padding: 8px 16px;
+      margin-bottom: 20px;
+    }
+  }
+  &__payment-info {
+    border-radius: 5px;
+    background-color: white;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+  }
+  &__title {
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+  }
+  &__content {
+    &__header {
+      border-radius: 5px;
+      background-color: white;
+      padding: 8px 16px;
+      margin-bottom: 10px;
+    }
+    &__item {
+      border-radius: 5px;
+      background-color: white;
+      padding: 16px 16px;
+      margin-bottom: 10px;
+      &__product {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        &__image {
+          width: 80px;
+          height: 80px;
+          // padding: 10px;
+          margin: 0px 8px;
+          img {
+            object-fit: contain;
+            height: 100%;
+            width: 100%;
+          }
+        }
+        &__info {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          p {
+            color: #686868;
+          }
+          &__tag {
+            height: 20px;
+            img {
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+  &__sidebar {
+    &__money {
+      border-radius: 5px;
+      background-color: white;
+      padding: 16px 16px;
+      margin-bottom: 10px;
+      &__price {
+        span:first-child {
+          color: #686868;
+        }
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0;
+      }
+    }
+  }
+}

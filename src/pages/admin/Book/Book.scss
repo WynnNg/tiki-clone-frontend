@@ -1,0 +1,8 @@
+.book {
+  &__table {
+    &__header {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

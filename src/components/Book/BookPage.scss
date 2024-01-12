@@ -1,0 +1,117 @@
+.book-detail {
+  background-color: #f5f5f5;
+  &__image {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 5px;
+    &__original {
+      width: 368px;
+      height: 368px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  &__info {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 5px;
+    &__author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      &__tag {
+        height: 20px;
+        img {
+          height: 100%;
+        }
+      }
+    }
+    &__title {
+      margin: 10px 0;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    &__rate {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      &__count {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      &__star {
+        font-size: 16px;
+        color: #787878;
+      }
+      &__sold {
+        font-size: 14px;
+        position: relative;
+        color: #787878;
+      }
+      &__sold::before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 0px;
+        bottom: 0px;
+        border-left: 1px solid #787878;
+        height: 15px;
+      }
+    }
+    &__price {
+      margin: 10px 0;
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+  &__desc-short {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 5px;
+    // height: 300px;
+    h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+  }
+  &__desc-long {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 5px;
+    h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #242424;
+    }
+  }
+  &__cart {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 5px;
+    &__title {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 15px 0;
+    }
+    &__quantity {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    &__price {
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+}

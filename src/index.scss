@@ -1,0 +1,78 @@
+@import "react-image-gallery/styles/scss/image-gallery.scss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+html {
+  height: 100%;
+  line-height: 1.2;
+}
+
+body {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.popover-cart {
+  &__content {
+    &__item {
+      margin: 15px 0;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      &__img {
+        width: 50px;
+        height: 50px;
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+      &__price {
+        color: red;
+      }
+    }
+    &__button {
+      margin: 10px 0;
+      text-align: end;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    max-width: 992px;
+    padding: 0 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    max-width: 576px;
+    padding: 0 0.2rem;
+  }
+}
