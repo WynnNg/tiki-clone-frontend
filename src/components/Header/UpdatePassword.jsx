@@ -25,7 +25,7 @@ export default function UpdatePassword() {
   };
 
   return (
-    <div style={{ width: "50%" }}>
+    <div style={{ width: "80%" }}>
       <Form
         form={form}
         name="profile"

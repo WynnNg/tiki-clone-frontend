@@ -25,6 +25,7 @@ import ViewBookDetail from "./ViewBookDetail";
 import ModalAddBook from "./ModalAddBook";
 import ModalUpdateBook from "./ModalUpdateBook";
 import * as XLSX from "xlsx";
+import { NumericFormat } from "react-number-format";
 
 export default function Book() {
   const [listBooks, setListBooks] = useState([]);
@@ -117,20 +118,22 @@ export default function Book() {
         <div className="book__table__header__title">Table List books</div>
         <div className="book__table__header__button">
           <Space>
-            <Button
-              type="primary"
-              icon={<DeliveredProcedureOutlined />}
-              onClick={downloadExcel}
-            >
-              Export
-            </Button>
-            <Button
-              type="primary"
-              icon={<PlusOutlined />}
-              onClick={() => setIsModalAddOpen(true)}
-            >
-              Thêm mới
-            </Button>
+            <div className="book__table__header__button__file">
+              <Button
+                type="primary"
+                icon={<DeliveredProcedureOutlined />}
+                onClick={downloadExcel}
+              >
+                Export
+              </Button>
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={() => setIsModalAddOpen(true)}
+              >
+                Thêm mới
+              </Button>
+            </div>
             <Button type="ghost">
               <RedoOutlined />
             </Button>
@@ -196,13 +199,22 @@ export default function Book() {
       dataIndex: "author",
       key: "author",
       sorter: {},
-      responsive: ["sm"],
     },
     {
       title: "Giá tiền",
       dataIndex: "price",
       key: "price",
       sorter: {},
+      render: (_, record) => {
+        return (
+          <NumericFormat
+            value={record.price}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix=" đ"
+          />
+        );
+      },
     },
     {
       title: "Ngày cập nhập",
@@ -217,6 +229,7 @@ export default function Book() {
     {
       title: "Action",
       key: "action",
+      responsive: ["md"],
       render: (_, record) => (
         <Space>
           <Popconfirm
@@ -252,7 +265,7 @@ export default function Book() {
     <>
       <div
         className="book"
-        style={{ display: "flex", flexDirection: "column", gap: "30px" }}
+        style={{ display: "flex", flexDirection: "column", gap: "5px" }}
       >
         <div className="book__search">
           <Form layout="vertical" onFinish={onFinishForm} form={form}>
@@ -295,9 +308,11 @@ export default function Book() {
             dataSource={listBooks}
             rowKey={(record) => record._id}
             scroll={{
-              y: 280,
+              y: 220,
+              x: 300,
             }}
             pagination={{
+              responsive: true,
               current: current,
               pageSize: pageSize,
               total: total,

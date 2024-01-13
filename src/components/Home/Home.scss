@@ -56,28 +56,46 @@
       align-items: center;
       justify-content: center;
       gap: 20px;
+      // width: 100vh;
       &__card {
-        width: 20%;
-      }
-      @media screen and (max-width: 1200px) {
-        &__card {
-          width: 25%;
-        }
-      }
-      @media screen and (max-width: 768px) {
-        &__card {
-          width: 50%;
-        }
-      }
-      @media screen and (max-width: 576px) {
-        &__card {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          &__info {
-            width: 60%;
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
+
+        width: 100%;
+        &__info {
+          background-color: white;
+          padding: 15px;
+          border-radius: 5px;
+          width: calc(100% / 5 - 40px);
+          margin: 5px;
+          cursor: pointer;
+          transition: all 0.4 ease;
+          &__img {
+            width: 100%;
+            img {
+              max-width: 100%;
+              max-height: 100%;
+            }
           }
-          width: 100%;
+        }
+        &__info:hover {
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        }
+        @media screen and (max-width: 1200px) {
+          &__info {
+            width: calc(100% / 4 - 40px);
+          }
+        }
+        @media screen and (max-width: 768px) {
+          &__info {
+            width: calc(100% / 2 - 40px);
+          }
+        }
+        @media screen and (max-width: 576px) {
+          &__info {
+            width: calc(100% - 40px);
+          }
         }
       }
     }

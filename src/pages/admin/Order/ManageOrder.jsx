@@ -69,7 +69,6 @@ export default function ManageOrder() {
       title: "Address",
       dataIndex: "address",
       sorter: {},
-      responsive: ["sm"],
     },
     {
       title: "Số điện thoại",
@@ -78,12 +77,12 @@ export default function ManageOrder() {
     },
     {
       title: "Ngày cập nhập",
+      responsive: ["md"],
       dataIndex: "updatedAt",
       sorter: {},
       render: (_, record) => {
         return moment(record.updatedAt).format("DD/MM/YYYY HH:mm:ss");
       },
-      responsive: ["md"],
     },
   ];
 
@@ -110,10 +109,16 @@ export default function ManageOrder() {
         dataSource={listOrder}
         onChange={onChange}
         rowKey={(record) => record._id}
+        scroll={{
+          y: 280,
+          x: 300,
+        }}
         pagination={{
+          responsive: true,
           defaultPageSize: 2,
           showSizeChanger: true,
           pageSizeOptions: [2, 5, 10, 20, 50, 100],
+
           total: total,
           current: current,
         }}

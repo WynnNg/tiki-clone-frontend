@@ -567,19 +567,100 @@ export default function Home() {
                   </div>
                 ) : (
                   <>
-                    <Row gutter={[10, 10]} wrap justify="start">
+                    <div className="home__main__content__card">
                       {listBooks &&
                         listBooks.map((item) => {
                           let bookThumbnail = `${
                             import.meta.env.VITE_BACKEND_URL
                           }/images/book/${item.thumbnail}`;
                           return (
-                            <Col
-                              className="home__main__content__card"
+                            <div
                               key={item._id}
+                              className="home__main__content__card__info"
+                              onClick={() => handleRedirectBook(item)}
                             >
-                              <Card
-                                className="home__main__content__card__info"
+                              <div className="home__main__content__card__info__img">
+                                <img alt="example" src={bookThumbnail} />
+                              </div>
+                              <div className="home__main__content__card__info__title">
+                                <div
+                                  style={{
+                                    fontWeight: "400",
+                                    fontSize: "14px",
+                                    margin: "5px 0",
+                                  }}
+                                >
+                                  {item.mainText}
+                                </div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "end",
+                                    gap: "10px",
+                                    margin: "10px 0",
+                                  }}
+                                >
+                                  <div>
+                                    <Rate
+                                      defaultValue={5}
+                                      disabled
+                                      style={{
+                                        fontSize: "10px",
+                                      }}
+                                    />
+                                  </div>
+                                  <div
+                                    style={{
+                                      fontWeight: "400",
+                                      fontSize: "10px",
+                                      color: "#808089",
+                                    }}
+                                  >
+                                    Đã bán {item.sold}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="home__main__content__card__info__desc">
+                                <div
+                                  style={{
+                                    color: "black",
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      fontSize: "18px",
+                                      fontWeight: "500",
+                                    }}
+                                  >
+                                    <NumericFormat
+                                      value={item.price}
+                                      displayType={"text"}
+                                      thousandSeparator={true}
+                                    />
+
+                                    <sup style={{ top: "-0.5rem" }}>đ</sup>
+                                  </div>
+                                  <div
+                                    style={{
+                                      display: "inline-block",
+                                      height: "18px",
+                                      marginLeft: "4px",
+                                      padding: "0px 4px",
+                                      background: "rgb(245, 245, 250)",
+                                      borderRadius: "1000px",
+                                      color: "rgb(39, 39, 42)",
+                                      fontSize: "12px",
+                                      fontWeight: 500,
+                                      lineHeight: "150%",
+                                    }}
+                                  >
+                                    -35%
+                                  </div>
+                                </div>
+                              </div>
+                              {/* <Card
                                 hoverable
                                 cover={
                                   <img alt="example" src={bookThumbnail} />
@@ -590,11 +671,11 @@ export default function Home() {
                                   title={cardTitle(item)}
                                   description={cardDescription(item)}
                                 />
-                              </Card>
-                            </Col>
+                              </Card> */}
+                            </div>
                           );
                         })}
-                    </Row>
+                    </div>
                     <Row justify="center">
                       <Pagination
                         current={current}

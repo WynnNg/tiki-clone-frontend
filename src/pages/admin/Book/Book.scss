@@ -3,6 +3,17 @@
     &__header {
       display: flex;
       justify-content: space-between;
+      &__button {
+        &__file {
+          display: flex;
+          gap: 15px;
+        }
+        @media screen and (max-width: 768px) {
+          &__file {
+            display: none;
+          }
+        }
+      }
     }
   }
 }

@@ -37,7 +37,7 @@ export default function ModalUpdateProfile(props) {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
-        width="50%"
+        width="80%"
       >
         <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
       </Modal>

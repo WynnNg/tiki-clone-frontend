@@ -25,6 +25,19 @@ sup {
 }
 
 .popover-cart {
+  @media screen and (max-width: 768px) {
+    &__content {
+      width: 270px;
+      &__item {
+        &__title {
+          width: 200px;
+        }
+        &__img {
+          display: none;
+        }
+      }
+    }
+  }
   &__content {
     &__item {
       margin: 15px 0;
@@ -48,6 +61,10 @@ sup {
       text-align: end;
     }
   }
+}
+
+.modal-update-profile {
+  width: 100%;
 }
 
 @media screen and (max-width: 1200px) {

@@ -325,8 +325,9 @@ export default function User() {
             dataSource={listUsers}
             onChange={onChange}
             rowKey={(record) => record._id}
-            scroll={{ y: 320 }}
+            scroll={{ y: 215 }}
             pagination={{
+              responsive: true,
               current: current,
               pageSize: pageSize,
               showSizeChanger: true,

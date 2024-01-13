@@ -85,10 +85,10 @@ export default function UpdateProfile() {
   };
 
   return (
-    <div>
-      <Row>
-        <Col span={12}>
-          <Row gutter={[10, 30]}>
+    <div className="modal-update-profile__info">
+      <Row gutter={[10, 20]}>
+        <Col md={12} xs={24}>
+          <Row gutter={[10, 20]}>
             <Col span={24}>
               <Avatar
                 size={150}
@@ -108,7 +108,7 @@ export default function UpdateProfile() {
             </Col>
           </Row>
         </Col>
-        <Col span={12}>
+        <Col md={12} xs={24}>
           <Form
             name="profile"
             form={form}

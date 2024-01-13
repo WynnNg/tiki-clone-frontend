@@ -69,10 +69,18 @@ const AdminPage = () => {
           <Sider
             trigger={null}
             collapsible
+            breakpoint="lg"
+            onBreakpoint={(broken) => {
+              if (broken) {
+                setCollapsed(true);
+              } else {
+                setCollapsed(false);
+              }
+            }}
             collapsed={collapsed}
             style={{
               overflow: "auto",
-              height: "100vh",
+              height: "100%",
             }}
           >
             <div
@@ -127,7 +135,7 @@ const AdminPage = () => {
             />
           </Sider>
         </div>
-        <Layout>
+        <Layout className="admin__layout">
           <div className="admin__main">
             <div className="admin__main__header">
               <div className="admin__main__header__toggle">
@@ -169,25 +177,13 @@ const AdminPage = () => {
               </div>
             </div>
 
-            <Content
-              style={{
-                margin: "16px 16px 0 16px",
-                padding: "16px 16px 0 16px",
-
-                minHeight: 300,
-                overflow: "initial",
-              }}
-            >
+            <Content className="admin__main__content">
               <Outlet />
             </Content>
             <Footer
               style={{
                 textAlign: "center",
-                height: 20,
-                position: "fixed",
-                bottom: 0,
-                left: "50%",
-                transform: "translateX(-50%)",
+                // height: 6,
               }}
             >
               Ant Design ©2023 Created by Ant UED
