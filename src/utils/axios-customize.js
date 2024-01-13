@@ -1,5 +1,7 @@
 import axios from "axios";
+import { Mutex } from "async-mutex";
 
+const mutex = new Mutex();
 const baseURL = import.meta.env.VITE_BACKEND_URL;
 const NO_RETRY_HEADER = "x-no-retry";
 
@@ -13,15 +15,25 @@ instance.defaults.headers.common = {
 };
 
 const handleRefreshToken = async () => {
-  let res = await instance.get("/api/v1/auth/refresh");
-  if (res && res.data.access_token) {
-    return res.data.access_token;
-  } else null;
+  return await mutex.runExclusive(async () => {
+    const res = await instance.get("/api/v1/auth/refresh");
+    if (res && res.data) return res.data.access_token;
+    else return null;
+  });
 };
 
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
+    if (
+      typeof window !== "undefined" &&
+      window &&
+      window.localStorage &&
+      window.localStorage.getItem("access_token")
+    ) {
+      config.headers.Authorization =
+        "Bearer " + window.localStorage.getItem("access_token");
+    }
     // Do something before request is sent
     return config;
   },
@@ -63,7 +75,12 @@ instance.interceptors.response.use(
       +error.response.status === 400 &&
       error.config.url === "/api/v1/auth/refresh"
     ) {
-      window.location.href = "/login";
+      if (
+        window.location.pathname !== "/" &&
+        !window.location.pathname.startsWith("/book")
+      ) {
+        window.location.href = "/login";
+      }
     }
 
     return error?.response?.data ?? Promise.reject(error);
