@@ -59,8 +59,7 @@ const RegisterPage = () => {
             span: 24,
           }}
           style={{
-            maxWidth: 1200,
-            minWidth: 400,
+            maxWidth: "100%",
           }}
           onFinish={onFinish}
           // onFinishFailed={onFinishFailed}

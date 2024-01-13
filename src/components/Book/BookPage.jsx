@@ -64,12 +64,12 @@ export default function BookPage() {
     <div className="book-detail">
       <div className="container">
         <Row gutter={20}>
-          <Col span={7}>
+          <Col lg={7} xs={24}>
             <div className="book-detail__image">
               <BookImage bookData={bookData} />
             </div>
           </Col>
-          <Col span={12}>
+          <Col lg={12} xs={24}>
             <div className="book-detail__info">
               <div className="book-detail__info__author">
                 <div className="book-detail__info__author__tag">
@@ -212,7 +212,7 @@ export default function BookPage() {
               </p>
             </div>
           </Col>
-          <Col span={5}>
+          <Col lg={5} xs={24}>
             <div className="book-detail__cart">
               <div className="book-detail__cart__title">Số lượng</div>
               <div className="book-detail__cart__quantity">
