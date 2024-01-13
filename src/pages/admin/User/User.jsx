@@ -33,6 +33,8 @@ import ModalEditUser from "./ModalEditUser";
 
 import moment from "moment";
 
+import "./User.scss";
+
 export default function User() {
   const [current, setCurrent] = useState(1);
   const [pageSize, setPageSize] = useState(1);
@@ -109,16 +111,19 @@ export default function User() {
       title: "Email",
       dataIndex: "email",
       sorter: {},
+      responsive: ["md"],
     },
     {
       title: "Số điện thoại",
       dataIndex: "phone",
       sorter: {},
+      responsive: ["sm"],
     },
     {
       title: "Ngày cập nhập",
       dataIndex: "updatedAt",
       sorter: {},
+      responsive: ["md"],
       render: (text, record, index) => {
         return moment(record.updatedAt).format("DD/MM/YYYY HH:mm:ss");
       },
@@ -228,34 +233,41 @@ export default function User() {
 
   const renderHeaderTable = () => {
     return (
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        className="header"
+        // style={{ display: "flex", justifyContent: "space-between" }}
+      >
         <span>Table List Users</span>
-        <span style={{ display: "flex", gap: "15px" }}>
-          <Button
-            type="primary"
-            icon={<DeliveredProcedureOutlined />}
-            onClick={downloadExcel}
-          >
-            Export
-          </Button>
-          <Button
-            type="primary"
-            icon={<CloudUploadOutlined />}
-            onClick={() => setShowModalUploadUser(true)}
-          >
-            Import
-          </Button>
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => setShowModalCreateUser(true)}
-          >
-            Thêm mới
-          </Button>
-          <Button type="ghost" onClick={fetchListUsers}>
-            <RedoOutlined />
-          </Button>
-        </span>
+        <div className="header__button">
+          <div className="header__button__file">
+            <Button
+              type="primary"
+              icon={<DeliveredProcedureOutlined />}
+              onClick={downloadExcel}
+            >
+              Export
+            </Button>
+            <Button
+              type="primary"
+              icon={<CloudUploadOutlined />}
+              onClick={() => setShowModalUploadUser(true)}
+            >
+              Import
+            </Button>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => setShowModalCreateUser(true)}
+            >
+              Thêm mới
+            </Button>
+          </div>
+          <span>
+            <Button type="ghost" onClick={fetchListUsers}>
+              <RedoOutlined />
+            </Button>
+          </span>
+        </div>
       </div>
     );
   };
@@ -266,7 +278,7 @@ export default function User() {
         <div className="user__input">
           <Form layout="vertical">
             <Row gutter={16}>
-              <Col span={8}>
+              <Col md={8} xs={24}>
                 <Form.Item label="Name">
                   <Input
                     placeholder="Name"
@@ -275,7 +287,7 @@ export default function User() {
                   />
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col md={8} xs={24}>
                 <Form.Item label="Email">
                   <Input
                     placeholder="Email"
@@ -284,7 +296,7 @@ export default function User() {
                   />
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col md={8} xs={24}>
                 <Form.Item label="Phone number">
                   <Input
                     placeholder="Phone number"

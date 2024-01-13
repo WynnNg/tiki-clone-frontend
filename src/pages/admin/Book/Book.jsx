@@ -189,12 +189,14 @@ export default function Book() {
       dataIndex: "category",
       key: "category",
       sorter: {},
+      responsive: ["md"],
     },
     {
       title: "Tác giả",
       dataIndex: "author",
       key: "author",
       sorter: {},
+      responsive: ["sm"],
     },
     {
       title: "Giá tiền",
@@ -206,6 +208,7 @@ export default function Book() {
       title: "Ngày cập nhập",
       dataIndex: "updatedAt",
       key: "updatedAt",
+      responsive: ["md"],
       render: (text, record, index) => {
         return moment(record.updatedAt).format("DD/MM/YYYY HH:mm:ss");
       },
@@ -254,17 +257,17 @@ export default function Book() {
         <div className="book__search">
           <Form layout="vertical" onFinish={onFinishForm} form={form}>
             <Row gutter={15}>
-              <Col span={8}>
+              <Col md={8} xs={24}>
                 <Form.Item name="mainText" label="Tên sách">
                   <Input />
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col md={8} xs={24}>
                 <Form.Item name="author" label="Tác giả">
                   <Input />
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col md={8} xs={24}>
                 <Form.Item name="category" label="Thể loại">
                   <Input />
                 </Form.Item>

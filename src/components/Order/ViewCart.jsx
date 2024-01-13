@@ -41,7 +41,7 @@ export default function ViewCart(props) {
         </Row>
       </div>
       <Row gutter={20}>
-        <Col span={18}>
+        <Col lg={18} xs={24}>
           <div className="order__content">
             <div className="order__content__header">
               <Row gutter={10}>
@@ -160,7 +160,7 @@ export default function ViewCart(props) {
             )}
           </div>
         </Col>
-        <Col span={6}>
+        <Col lg={6} xs={24}>
           <div className="order__sidebar">
             <div className="order__sidebar__money">
               <div className="order__sidebar__money__price">

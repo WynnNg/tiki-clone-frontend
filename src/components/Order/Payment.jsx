@@ -66,7 +66,7 @@ export default function Payment(props) {
   return (
     <div className="order">
       <Row gutter={20}>
-        <Col span={16}>
+        <Col lg={16} xs={24}>
           <div className="order__content">
             {itemCart &&
               itemCart.length > 0 &&
@@ -160,7 +160,7 @@ export default function Payment(props) {
               })}
           </div>
         </Col>
-        <Col span={8}>
+        <Col lg={8} xs={24}>
           <div className="order__payment-info">
             <Form
               form={form}

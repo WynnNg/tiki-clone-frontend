@@ -46,21 +46,25 @@ export default function History() {
       title: "STT",
       dataIndex: "index",
       key: "index",
+      responsive: ["xl"],
     },
     {
       title: "Thời gian",
       dataIndex: "createdAt",
       key: "createdAt",
+      responsive: ["sm"],
     },
     {
       title: "Tổng số tiền tiền",
       dataIndex: "totalPrice",
       key: "totalPrice",
+      responsive: ["sm"],
     },
     {
       title: "Trạng thái",
       key: "tags",
       dataIndex: "tags",
+      responsive: ["md"],
       render: (_, record) => (
         <div key={record.id}>
           <Tag color="green">Thành công</Tag>

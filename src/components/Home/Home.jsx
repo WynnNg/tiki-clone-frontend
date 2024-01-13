@@ -13,6 +13,8 @@ import {
   notification,
   Pagination,
   InputNumber,
+  Spin,
+  Drawer,
 } from "antd";
 import React, { useEffect, useState } from "react";
 import { FilterTwoTone, RedoOutlined, WarningTwoTone } from "@ant-design/icons";
@@ -28,12 +30,20 @@ const { Meta } = Card;
 export default function Home() {
   const [category, setCategory] = useState([]);
   const [current, setCurrent] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const [pageSize, setPageSize] = useState(10);
   const [total, setTotal] = useState(1);
   const [listBooks, setListBooks] = useState([]);
   const [sortQuery, setSortQuery] = useState("&sort=-sold");
   const [filter, setFilter] = useState("");
   const [searchTerm, setSearchTerm] = useOutletContext();
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
 
   const [form] = Form.useForm();
 
@@ -59,6 +69,7 @@ export default function Home() {
       query += `&mainText=/${searchTerm}/i
       `;
     }
+    setIsLoading(true);
     let res = await getBooksWithPaginate(current, pageSize, query)
       .then(function (response) {
         return response;
@@ -70,6 +81,7 @@ export default function Home() {
           icon: <WarningTwoTone twoToneColor="red" />,
         });
       });
+    setIsLoading(false);
     if (res && res.data) {
       setListBooks(res.data.result);
       setTotal(res.data.meta.total);
@@ -134,6 +146,7 @@ export default function Home() {
   const resetForm = () => {
     form.resetFields();
     setFilter("");
+    setSearchTerm("");
   };
 
   const nonAccentVietnamese = (str) => {
@@ -399,7 +412,7 @@ export default function Home() {
               </div>
             </div>
           </Col>
-          <Col xl={20} lg={19} sm={24}>
+          <Col xl={20} lg={19} md={24}>
             <div className="home__main">
               <div className="home__main__tabs">
                 <Tabs
@@ -408,42 +421,192 @@ export default function Home() {
                   onChange={onChangeTab}
                 />
               </div>
-              <div className="home__main__content">
-                <Row gutter={[10, 10]} wrap justify="start">
-                  {listBooks &&
-                    listBooks.map((item) => {
-                      let bookThumbnail = `${
-                        import.meta.env.VITE_BACKEND_URL
-                      }/images/book/${item.thumbnail}`;
-                      return (
-                        <Col
-                          className="home__main__content__card"
-                          key={item._id}
-                        >
-                          <Card
-                            hoverable
-                            cover={<img alt="example" src={bookThumbnail} />}
-                            onClick={() => handleRedirectBook(item)}
+              <div className="home__main__filter">
+                <span onClick={showDrawer}>
+                  <FilterTwoTone />
+                  <> </>
+                  Bộ lọc
+                </span>
+                <Drawer
+                  title="Lọc Sản Phẩm"
+                  placement="right"
+                  // width="576px"
+                  onClose={onClose}
+                  open={open}
+                >
+                  <div className="home__sidebar">
+                    <Form
+                      onValuesChange={handleFormOnChange}
+                      onFinish={onFinishForm}
+                      form={form}
+                    >
+                      <div className="home__sidebar__category">
+                        <div className="home__sidebar__category__title">
+                          Danh mục sản phẩm
+                        </div>
+                        <div className="home__sidebar__category__item">
+                          <Form.Item name="category">
+                            <Checkbox.Group
+                              style={{ width: "100%" }}
+                              onChange={onChangeCheckBox}
+                            >
+                              <Row gutter={[5, 5]}>
+                                {category &&
+                                  category.map((item, index) => (
+                                    <Col span={24} key={index}>
+                                      <Checkbox value={item}>{item}</Checkbox>
+                                    </Col>
+                                  ))}
+                              </Row>
+                            </Checkbox.Group>
+                          </Form.Item>
+                        </div>
+                      </div>
+                      <Divider />
+
+                      <div className="home__sidebar__price">
+                        <div className="home__sidebar__price__title">
+                          Khoảng giá
+                        </div>
+
+                        <Row gutter={5} justify="space-between">
+                          <Col span={11}>
+                            <Form.Item name="minPrice">
+                              <InputNumber
+                                placeholder="đ TỪ"
+                                formatter={(value) =>
+                                  `${value}`.replace(
+                                    /\B(?=(\d{3})+(?!\d))/g,
+                                    ","
+                                  )
+                                }
+                                min={0}
+                              />
+                            </Form.Item>
+                          </Col>
+                          <Col span={11}>
+                            <Form.Item name="maxPrice">
+                              <InputNumber
+                                placeholder="đ ĐẾN"
+                                formatter={(value) =>
+                                  `${value}`.replace(
+                                    /\B(?=(\d{3})+(?!\d))/g,
+                                    ","
+                                  )
+                                }
+                                min={0}
+                              />
+                            </Form.Item>
+                          </Col>
+                        </Row>
+                        <Form.Item>
+                          <Button
+                            type="primary"
+                            htmlType="submit"
+                            style={{ width: "100%" }}
                           >
-                            <Meta
-                              title={cardTitle(item)}
-                              description={cardDescription(item)}
-                            />
-                          </Card>
-                        </Col>
-                      );
-                    })}
-                </Row>
-                <Row justify="center">
-                  <Pagination
-                    current={current}
-                    total={total}
-                    showSizeChanger
-                    pageSizeOptions={[5, 10, 20, 50, 100]}
-                    // onShowSizeChange={onShowSizeChange}
-                    onChange={onPaginateChange}
-                  />
-                </Row>
+                            Áp dụng
+                          </Button>
+                        </Form.Item>
+                      </div>
+                    </Form>
+                    <Divider />
+                    <div className="home__sidebar__rating">
+                      <div className="home__sidebar__rating__title">
+                        Đánh giá
+                      </div>
+                      <Rate
+                        allowHalf
+                        defaultValue={5}
+                        style={{ fontSize: "16px" }}
+                      />
+                      <Space>
+                        <Rate
+                          allowHalf
+                          defaultValue={4}
+                          style={{ fontSize: "16px" }}
+                        />
+                        <span>Trở lên</span>
+                      </Space>
+                      <Space>
+                        <Rate
+                          allowHalf
+                          defaultValue={3}
+                          style={{ fontSize: "16px" }}
+                        />
+                        <span>Trở lên</span>
+                      </Space>
+                      <Space>
+                        <Rate
+                          allowHalf
+                          defaultValue={2}
+                          style={{ fontSize: "16px" }}
+                        />
+                        <span>Trở lên</span>
+                      </Space>
+                      <Space>
+                        <Rate
+                          allowHalf
+                          defaultValue={1}
+                          style={{ fontSize: "16px" }}
+                        />
+                        <span>Trở lên</span>
+                      </Space>
+                    </div>
+                  </div>
+                </Drawer>
+              </div>
+              <div className="home__main__content">
+                {isLoading ? (
+                  <div
+                    style={{
+                      margin: 250,
+                    }}
+                  >
+                    <Spin size="large" />
+                  </div>
+                ) : (
+                  <>
+                    <Row gutter={[10, 10]} wrap justify="start">
+                      {listBooks &&
+                        listBooks.map((item) => {
+                          let bookThumbnail = `${
+                            import.meta.env.VITE_BACKEND_URL
+                          }/images/book/${item.thumbnail}`;
+                          return (
+                            <Col
+                              className="home__main__content__card"
+                              key={item._id}
+                            >
+                              <Card
+                                className="home__main__content__card__info"
+                                hoverable
+                                cover={
+                                  <img alt="example" src={bookThumbnail} />
+                                }
+                                onClick={() => handleRedirectBook(item)}
+                              >
+                                <Meta
+                                  title={cardTitle(item)}
+                                  description={cardDescription(item)}
+                                />
+                              </Card>
+                            </Col>
+                          );
+                        })}
+                    </Row>
+                    <Row justify="center">
+                      <Pagination
+                        current={current}
+                        total={total}
+                        showSizeChanger
+                        pageSizeOptions={[5, 10, 20, 50, 100]}
+                        // onShowSizeChange={onShowSizeChange}
+                        onChange={onPaginateChange}
+                      />
+                    </Row>
+                  </>
+                )}
               </div>
             </div>
           </Col>

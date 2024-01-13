@@ -43,6 +43,7 @@ export default function ManageOrder() {
     {
       title: "id",
       dataIndex: "_id",
+      responsive: ["md"],
     },
     {
       title: "Price",
@@ -68,6 +69,7 @@ export default function ManageOrder() {
       title: "Address",
       dataIndex: "address",
       sorter: {},
+      responsive: ["sm"],
     },
     {
       title: "Số điện thoại",
@@ -81,6 +83,7 @@ export default function ManageOrder() {
       render: (_, record) => {
         return moment(record.updatedAt).format("DD/MM/YYYY HH:mm:ss");
       },
+      responsive: ["md"],
     },
   ];
 

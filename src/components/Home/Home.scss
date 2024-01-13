@@ -34,6 +34,15 @@
     }
   }
   &__main {
+    &__filter {
+      margin: 10px;
+      display: none;
+    }
+    @media screen and (max-width: 992px) {
+      &__filter {
+        display: block;
+      }
+    }
     &__tabs {
       padding: 12px 8px;
       border-radius: 5px;
@@ -44,6 +53,8 @@
       margin: 10px 0;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 20px;
       &__card {
         width: 20%;
@@ -56,6 +67,17 @@
       @media screen and (max-width: 768px) {
         &__card {
           width: 50%;
+        }
+      }
+      @media screen and (max-width: 576px) {
+        &__card {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &__info {
+            width: 60%;
+          }
+          width: 100%;
         }
       }
     }
